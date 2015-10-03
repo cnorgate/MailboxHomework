@@ -24,12 +24,17 @@
                                         <rect key="frame" x="0.0" y="-8" width="320" height="94"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="0SU-Cv-UcH">
-                                                <rect key="frame" x="287" y="31" width="25" height="25"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Q2r-a6-ZJz" userLabel="background">
+                                                <rect key="frame" x="0.0" y="-8" width="320" height="102"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.86951546719999995" green="0.86951546719999995" blue="0.86951546719999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </imageView>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" image="later_icon" id="0SU-Cv-UcH">
+                                                <rect key="frame" x="279" y="39" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="archive_icon" id="I1m-fc-urD">
-                                                <rect key="frame" x="8" y="31" width="25" height="25"/>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" image="archive_icon" id="I1m-fc-urD">
+                                                <rect key="frame" x="8" y="39" width="25" height="25"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="ZwI-gh-KMC">
@@ -41,7 +46,7 @@
                                                 </connections>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.86951546717171713" green="0.86951546717171713" blue="0.86951546717171713" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.86951546719999995" green="0.86951546719999995" blue="0.86951546719999995" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
                             </scrollView>
@@ -61,6 +66,9 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" image="reschedule" id="OMH-eJ-zLe">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask"/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KBw-kF-R3g" appends="YES" id="VIk-yu-5HE"/>
+                                </connections>
                             </imageView>
                             <imageView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" image="list" id="1Gr-FW-TZF">
                                 <rect key="frame" x="1" y="1" width="320" height="568"/>
@@ -70,10 +78,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="archiveIcon" destination="I1m-fc-urD" id="gAR-c7-EiJ"/>
+                        <outlet property="backgroundView" destination="Q2r-a6-ZJz" id="9tM-C3-a6l"/>
                         <outlet property="feed" destination="Fb1-9f-uCC" id="vHA-7T-Ckq"/>
                         <outlet property="helpLabel" destination="udU-xk-2eg" id="L6V-7s-AJ1"/>
+                        <outlet property="laterIcon" destination="0SU-Cv-UcH" id="pHh-GA-3Nm"/>
                         <outlet property="message" destination="ZwI-gh-KMC" id="RC3-ee-qG7"/>
                         <outlet property="nav" destination="gNB-3N-Dz5" id="M9n-Ng-wRz"/>
+                        <outlet property="reschedule" destination="OMH-eJ-zLe" id="sX6-K7-FOh"/>
                         <outlet property="scrollView" destination="Liz-vf-bCZ" id="44D-4c-Dk8"/>
                         <outlet property="search" destination="pcd-Ge-IES" id="EaI-1K-u39"/>
                     </connections>
@@ -84,6 +96,7 @@
                         <action selector="onPanMessage:" destination="BYZ-38-t0r" id="UY9-du-afX"/>
                     </connections>
                 </panGestureRecognizer>
+                <tapGestureRecognizer id="KBw-kF-R3g" userLabel="reschedule"/>
             </objects>
             <point key="canvasLocation" x="472" y="624"/>
         </scene>
