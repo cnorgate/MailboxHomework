@@ -16,10 +16,6 @@
                                 <rect key="frame" x="0.0" y="140" width="320" height="428"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Fb1-9f-uCC">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="1202"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </imageView>
                                     <view contentMode="scaleToFill" id="1zc-FL-dXF">
                                         <rect key="frame" x="0.0" y="-8" width="320" height="94"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -48,6 +44,10 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.86951546719999995" green="0.86951546719999995" blue="0.86951546719999995" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Fb1-9f-uCC">
+                                        <rect key="frame" x="0.0" y="86" width="320" height="1202"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                    </imageView>
                                 </subviews>
                             </scrollView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nav" id="gNB-3N-Dz5">
@@ -96,7 +96,11 @@
                         <action selector="onPanMessage:" destination="BYZ-38-t0r" id="UY9-du-afX"/>
                     </connections>
                 </panGestureRecognizer>
-                <tapGestureRecognizer id="KBw-kF-R3g" userLabel="reschedule"/>
+                <tapGestureRecognizer id="KBw-kF-R3g" userLabel="reschedule">
+                    <connections>
+                        <action selector="onTapReschedule:" destination="BYZ-38-t0r" id="b1F-gp-xwT"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="472" y="624"/>
         </scene>

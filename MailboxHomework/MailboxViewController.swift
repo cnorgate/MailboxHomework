@@ -21,6 +21,7 @@ class MailboxViewController: UIViewController {
     
     
     @IBOutlet weak var feed: UIImageView!
+    var feedOriginalCenter: CGPoint!
     
     @IBOutlet weak var search: UIImageView!
     
@@ -79,6 +80,7 @@ class MailboxViewController: UIViewController {
             messageOriginalCenter = message.center
             laterOriginalCenter = laterIcon.center
             archiveOriginalCenter = archiveIcon.center
+            feedOriginalCenter = feed.center
         } else if sender.state == UIGestureRecognizerState.Changed {
             //Edit the trays location
             message.center = CGPoint(x: messageOriginalCenter.x + translation.x, y: messageOriginalCenter.y)
@@ -167,6 +169,40 @@ class MailboxViewController: UIViewController {
     
     
     
+    @IBAction func onTapReschedule(sender: UITapGestureRecognizer) {
+        print("tapped")
+        
+        // turn alpha back to zero slowly
+        UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
+            self.reschedule.alpha = 0
+            }, completion: { (completed) -> Void in
+                //nothing
+        })
+        
+        
+
+        // Move up and down the feed slowly
+        UIView.animateWithDuration(1, delay: 0, options: [UIViewAnimationOptions.Autoreverse], animations: { () -> Void in
+            self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y - 86)
+            }) { (completed) -> Void in
+                self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y)
+        }
+        
+        
+        
+        // Replace the various assets to their original state
+        UIView.animateWithDuration(0, delay: 1, options: [], animations: { () -> Void in
+            // Move message back to original place
+            self.message.center = CGPoint(x: self.messageOriginalCenter.x, y: self.messageOriginalCenter.y)
+            
+            // Move the icons back to original positions
+            self.laterIcon.center = CGPoint(x: self.laterOriginalCenter.x, y: self.laterOriginalCenter.y)
+            }, completion: { (completed) -> Void in
+                //nothing
+        })
+        
+
+    }
     
 
     /*
