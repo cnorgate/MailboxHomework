@@ -25,6 +25,20 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="0.86951546719999995" green="0.86951546719999995" blue="0.86951546719999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" id="yRZ-fG-yIo" userLabel="Archive Icon Wrapper">
+                                                <rect key="frame" x="8" y="30" width="50" height="40"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" image="archive_icon" id="I1m-fc-urD">
+                                                        <rect key="frame" x="17" y="12" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" image="delete_icon" id="KWi-JH-Wvz">
+                                                        <rect key="frame" x="17" y="12" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                </subviews>
+                                            </view>
                                             <view contentMode="scaleToFill" id="GQg-oq-kJ3" userLabel="Later Icon Wrapper">
                                                 <rect key="frame" x="270" y="35" width="43" height="34"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -39,10 +53,6 @@
                                                     </imageView>
                                                 </subviews>
                                             </view>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.5" contentMode="center" image="archive_icon" id="I1m-fc-urD">
-                                                <rect key="frame" x="8" y="39" width="25" height="25"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="ZwI-gh-KMC">
                                                 <rect key="frame" x="0.0" y="8" width="320" height="86"/>
                                                 <autoresizingMask key="autoresizingMask"/>
@@ -92,7 +102,9 @@
                     </view>
                     <connections>
                         <outlet property="archiveIcon" destination="I1m-fc-urD" id="gAR-c7-EiJ"/>
+                        <outlet property="archiveIconWrappe" destination="yRZ-fG-yIo" id="Nrr-2F-eLs"/>
                         <outlet property="backgroundView" destination="Q2r-a6-ZJz" id="9tM-C3-a6l"/>
+                        <outlet property="deleteIcon" destination="KWi-JH-Wvz" id="Lmt-a7-cxP"/>
                         <outlet property="feed" destination="Fb1-9f-uCC" id="vHA-7T-Ckq"/>
                         <outlet property="helpLabel" destination="udU-xk-2eg" id="L6V-7s-AJ1"/>
                         <outlet property="laterIcon" destination="0SU-Cv-UcH" id="pHh-GA-3Nm"/>
@@ -117,7 +129,11 @@
                         <action selector="onTapReschedule:" destination="BYZ-38-t0r" id="b1F-gp-xwT"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="b9j-p5-QZu" userLabel="listScreenTap"/>
+                <tapGestureRecognizer id="b9j-p5-QZu" userLabel="listScreenTap">
+                    <connections>
+                        <action selector="onTapReschedule:" destination="BYZ-38-t0r" id="4na-pF-5V2"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="472" y="624"/>
         </scene>
@@ -137,6 +153,7 @@
     </scenes>
     <resources>
         <image name="archive_icon" width="25" height="25"/>
+        <image name="delete_icon" width="25" height="25"/>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
         <image name="later_icon" width="25" height="25"/>

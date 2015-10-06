@@ -46,6 +46,11 @@ class MailboxViewController: UIViewController {
     @IBOutlet weak var listScreen: UIImageView!
     
     
+    @IBOutlet weak var archiveIconWrappe: UIView!
+    var archiveWrapperOriginalCenter: CGPoint!
+    
+    
+    @IBOutlet weak var deleteIcon: UIImageView!
     
     
     
@@ -98,6 +103,7 @@ class MailboxViewController: UIViewController {
             laterWrapperOriginalCenter = laterIconWrapper.center
             archiveOriginalCenter = archiveIcon.center
             feedOriginalCenter = feed.center
+            archiveWrapperOriginalCenter = archiveIconWrappe.center
         
             
             
@@ -129,16 +135,31 @@ class MailboxViewController: UIViewController {
                         //nothing
                 })
                 backgroundView.backgroundColor = UIColor.grayColor()
-            } else {
+            } else if translation.x < 0 {
                 laterIconWrapper.center = CGPoint(x: laterWrapperOriginalCenter.x, y: laterWrapperOriginalCenter.y)
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { () -> Void in
                     self.laterIcon.alpha = 0.5
                     }, completion: { (completed) -> Void in
                         //nothing
                 })
-
+                
                 //backgroundView.backgroundColor = UIColor.grayColor()
+                
+            } else if translation.x < 30 {
+                
+            } else if translation.x < 60 {
+                
+            } else if translation.x < 260 {
+                
+            } else {
+                
             }
+            
+            
+            
+            
+            
+        
             print("Gesture changed at: \(point) \(translation)")
             
             
@@ -214,6 +235,8 @@ class MailboxViewController: UIViewController {
         // turn alpha back to zero slowly
         UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
             self.reschedule.alpha = 0
+            self.listScreen.alpha = 0
+            self.listIcon.alpha = 0
             }, completion: { (completed) -> Void in
                 //nothing
         })
@@ -236,6 +259,8 @@ class MailboxViewController: UIViewController {
             
             // Move the icons back to original positions
             self.laterIconWrapper.center = CGPoint(x: self.laterWrapperOriginalCenter.x, y: self.laterWrapperOriginalCenter.y)
+            
+            self.backgroundView.backgroundColor = UIColor.grayColor()
             }, completion: { (completed) -> Void in
                 //nothing
         })
