@@ -127,6 +127,7 @@ class MailboxViewController: UIViewController {
                 backgroundView.backgroundColor = UIColor.orangeColor()
                 laterIcon.alpha = 1
                 listIcon.alpha = 0
+                archiveIcon.alpha = 0
                 //(red: , green: 255, blue: 102, alpha: 1.0)
             } else if translation.x < -30 {
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { () -> Void in
@@ -135,31 +136,41 @@ class MailboxViewController: UIViewController {
                         //nothing
                 })
                 backgroundView.backgroundColor = UIColor.grayColor()
-            } else if translation.x < 0 {
+            } else if translation.x < 30 {
                 laterIconWrapper.center = CGPoint(x: laterWrapperOriginalCenter.x, y: laterWrapperOriginalCenter.y)
                 UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { () -> Void in
                     self.laterIcon.alpha = 0.5
+                    self.archiveIcon.alpha = 0.5
                     }, completion: { (completed) -> Void in
                         //nothing
                 })
                 
                 //backgroundView.backgroundColor = UIColor.grayColor()
                 
-            } else if translation.x < 30 {
-                
             } else if translation.x < 60 {
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0, initialSpringVelocity: 0, options: [], animations: { () -> Void in
+                    self.archiveIcon.alpha = 1
+                    }, completion: { (completed) -> Void in
+                        //nothing
+                })
+                backgroundView.backgroundColor = UIColor.grayColor()
                 
             } else if translation.x < 260 {
+                archiveIconWrappe.center = CGPoint(x: archiveWrapperOriginalCenter.x + translation.x - 60, y: archiveWrapperOriginalCenter.y)
+                backgroundView.backgroundColor = UIColor.greenColor()
+                laterIcon.alpha = 0
+                listIcon.alpha = 0
+                deleteIcon.alpha = 0
+                archiveIcon.alpha = 1
                 
+            } else if translation.x > 260 {
+                archiveIconWrappe.center = CGPoint(x: archiveWrapperOriginalCenter.x + translation.x - 60, y: archiveWrapperOriginalCenter.y)
+                archiveIcon.alpha = 0
+                deleteIcon.alpha = 1
+                backgroundView.backgroundColor = UIColor.redColor()
             } else {
-                
+                // do nothing
             }
-            
-            
-            
-            
-            
-        
             print("Gesture changed at: \(point) \(translation)")
             
             
@@ -202,7 +213,7 @@ class MailboxViewController: UIViewController {
                         //nothing
                 })
                 
-            } else {
+            } else if translation.x < 60 {
                 UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
                     // Move message back to original place
                     self.message.center = CGPoint(x: self.messageOriginalCenter.x, y: self.messageOriginalCenter.y)
@@ -210,10 +221,108 @@ class MailboxViewController: UIViewController {
                     // Move the icons back to original positions
                     self.laterIconWrapper.center = CGPoint(x: self.laterWrapperOriginalCenter.x, y: self.laterWrapperOriginalCenter.y)
                     
+                    // Move the icons back to original positions
+                    self.archiveIconWrappe.center = CGPoint(x: self.archiveWrapperOriginalCenter.x, y: self.archiveWrapperOriginalCenter.y)
+                    
+                    self.archiveIcon.alpha = 0.5
+                    self.laterIcon.alpha = 0.5
+                    
                     print("Gesture ended at: \(point)")
                     }, completion: { (completed) -> Void in
                         //nothing
                 })
+                
+                
+            } else if translation.x < 260 {
+                // go to green
+                self.archiveIcon.alpha = 1
+                self.laterIcon.alpha = 0
+                
+                UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
+                    // Move message back to original place
+                    self.message.center = CGPoint(x: self.messageOriginalCenter.x + 320 , y: self.messageOriginalCenter.y)
+                    
+                    // Move the icons back to original positions
+                    self.archiveIconWrappe.center = CGPoint(x: self.archiveWrapperOriginalCenter.x + 320, y: self.archiveWrapperOriginalCenter.y)
+                    
+                    //self.reschedule.alpha = 1
+                    
+                    print("Gesture ended at: \(point)")
+                    }, completion: { (completed) -> Void in
+                        // Move up and down the feed slowly
+                        UIView.animateWithDuration(1, delay: 0, options: [UIViewAnimationOptions.Autoreverse], animations: { () -> Void in
+                            self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y - 86)
+                            }) { (completed) -> Void in
+                                self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y)
+                        }
+                        
+                        
+                        
+                        // Replace the various assets to their original state
+                        UIView.animateWithDuration(0, delay: 1, options: [], animations: { () -> Void in
+                            // Move message back to original place
+                            self.message.center = CGPoint(x: self.messageOriginalCenter.x, y: self.messageOriginalCenter.y)
+                            
+                            // Move the icons back to original positions
+                            self.laterIconWrapper.center = CGPoint(x: self.laterWrapperOriginalCenter.x, y: self.laterWrapperOriginalCenter.y)
+                            
+                            self.archiveIconWrappe.center = CGPoint(x: self.archiveWrapperOriginalCenter.x, y: self.archiveWrapperOriginalCenter.y)
+                            
+                            self.backgroundView.backgroundColor = UIColor.grayColor()
+                            
+                            self.deleteIcon.alpha = 0
+                            self.archiveIcon.alpha = 1
+                            self.laterIcon.alpha = 1
+                            }, completion: { (completed) -> Void in
+                                //nothing
+                        })
+                })
+            } else {
+                // go to red
+                self.deleteIcon.alpha = 1
+                self.archiveIcon.alpha = 0
+                self.laterIcon.alpha = 0
+                
+                UIView.animateWithDuration(0.5, delay: 0, options: [], animations: { () -> Void in
+                    // Move message back to original place
+                    self.message.center = CGPoint(x: self.messageOriginalCenter.x + 320 , y: self.messageOriginalCenter.y)
+                    
+                    // Move the icons back to original positions
+                    self.archiveIconWrappe.center = CGPoint(x: self.archiveWrapperOriginalCenter.x + 320, y: self.archiveWrapperOriginalCenter.y)
+                    
+                    //self.reschedule.alpha = 1
+                    
+                    print("Gesture ended at: \(point)")
+                    }, completion: { (completed) -> Void in
+                        // Move up and down the feed slowly
+                        UIView.animateWithDuration(1, delay: 0, options: [UIViewAnimationOptions.Autoreverse], animations: { () -> Void in
+                            self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y - 86)
+                            }) { (completed) -> Void in
+                                self.feed.center = CGPoint(x: self.feedOriginalCenter.x, y: self.feedOriginalCenter.y)
+                        }
+                        
+                        
+                        
+                        // Replace the various assets to their original state
+                        UIView.animateWithDuration(0, delay: 1, options: [], animations: { () -> Void in
+                            // Move message back to original place
+                            self.message.center = CGPoint(x: self.messageOriginalCenter.x, y: self.messageOriginalCenter.y)
+                            
+                            // Move the icons back to original positions
+                            self.laterIconWrapper.center = CGPoint(x: self.laterWrapperOriginalCenter.x, y: self.laterWrapperOriginalCenter.y)
+                            
+                            self.archiveIconWrappe.center = CGPoint(x: self.archiveWrapperOriginalCenter.x, y: self.archiveWrapperOriginalCenter.y)
+                            
+                            self.backgroundView.backgroundColor = UIColor.grayColor()
+                            
+                            self.deleteIcon.alpha = 0
+                            self.archiveIcon.alpha = 1
+                            self.laterIcon.alpha = 1
+                            }, completion: { (completed) -> Void in
+                                //nothing
+                        })
+                })
+
             }
         }
     }
